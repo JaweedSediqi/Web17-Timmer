@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="new.css">
+</head>
+<body>
+    <div class="containner">
+        <div class="hero">
+            <h1 id="h1">00:00:00</h1>
+            <div class="row">
+                <button onclick="start()">Start</button>
+                <button onclick="stop()">Stop</button>
+                <button onclick="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let[secounds,minute,hours]=[0,0,0];
+        let h1=document.getElementById('h1');
+        let timmer;
+
+        function UpdateTimmer(){
+            secounds++;
+            if(secounds==60){
+                secounds=0;
+                minute++;
+                if(minute==60){
+                    minute=0;
+                    hours++;
+                }
+            }
+            let s=secounds<10?'0'+secounds:secounds;
+            let m=minute<10?'0'+minute:minute;
+            let h=hours<10?'0'+hours:hours;
+            h1.innerHTML=h+":"+m+":"+s;
+        }
+        function start(){
+            timmer=setInterval(UpdateTimmer,1000);
+        }
+        function stop(){
+            clearInterval(timmer);
+        }
+        function reset(){
+            clearInterval(timmer);
+			[secounds,minute,hours]=[0,0,0];
+            h1.innerHTML="00:00:00";
+                }
+        
+    </script>
+</body>
+</html>
